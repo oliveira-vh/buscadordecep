@@ -1,24 +1,27 @@
 # buscadordecep
 
-## Project setup
+Buscador de CEP feito com VueJS, Vue Router, Vuetify, Axios e a API ViaCEP.
+
+Nesta app é possível encontrar logradouro com CEP assim como pesquisar por logradouros e CEP por cidades.
+
+## Após clonar o repositório, instale as dependências com:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compile para desenvolvimento:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compile e minifique para produção:
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Lint:
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
