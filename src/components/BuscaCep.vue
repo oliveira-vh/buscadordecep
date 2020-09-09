@@ -62,11 +62,7 @@ export default {
       buscarCep(){
         this.$api.get(`${this.cep}/json/`)
           .then(res => this.resultado = res.data)
-      },
-      setCep(value) {
-        this.name = value
-        this.$v.name.$touch()
-    }
+      }
     }
  
 };
