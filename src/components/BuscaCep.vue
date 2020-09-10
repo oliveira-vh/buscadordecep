@@ -2,23 +2,26 @@
   <div class="busca-cep">
       
         <v-container>
-        <form>
+        <v-form v-model="valid" ref="form">
           <v-row justify="center">
             <v-col cols="12" lg="4" md="8" sm="12">
           <v-text-field
             v-model="cep"
             label="CEP"
+            :rules="cepRules"
+            :counter="8"
             required
           ></v-text-field>
+          
           </v-col>
          </v-row>
 
          <v-row justify="center" align="center">
            <v-col cols="12" lg="4" md="8" sm="12">
-          <v-btn class="mr-4" @click="buscarCep">BUSCAR</v-btn>
+          <v-btn class="mr-4" @click="buscarCep" :class="{ red: !valid, green: valid }" >BUSCAR</v-btn>
           </v-col>
           </v-row>
-        </form>
+        </v-form>
         
         </v-container>
 
@@ -50,21 +53,24 @@
 </template>
 
 <script>
-
 export default {
   data(){
     return {
       resultado: '',
-      cep: ''
+      valid: false,
+      cep: '',
+      cepRules: [
+        (v) => !!v || 'CEP requerido',
+        (v) => v && v.length == 8 || 'CEP deve conter 8 dígitos'
+      ],
     }
   },
   methods: {
       buscarCep(){
         this.$api.get(`${this.cep}/json/`)
-          .then(res => this.resultado = res.data)
+          .then(res => this.resultado = res.data).then(this.$refs.form.validate())
       }
     }
  
 };
 </script>
-

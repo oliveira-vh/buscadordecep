@@ -2,12 +2,13 @@
   <div class="busca-endereco">
       
         <v-container>
-        <form>
+        <v-form v-model="valid" ref="form">
           <v-row justify="center">
             <v-col cols="12" lg="6" md="8" sm="12">
           <v-text-field
             v-model="cidade"
             label="Cidade"
+            :rules="cidadeRules"
             required
           ></v-text-field>
           </v-col>
@@ -18,6 +19,7 @@
           <v-text-field
             v-model="endereco"
             label="Endereço"
+            :rules="enderecoRules"
             required
           ></v-text-field>
           </v-col>
@@ -29,6 +31,7 @@
                 :items="uf"
                 label="UF"
                 v-model="estado"
+                :rules="ufRules"
                 required
               ></v-select>
             </v-col>
@@ -36,10 +39,10 @@
 
          <v-row justify="center" align="center">
            <v-col cols="12" lg="6" md="8" sm="12">
-          <v-btn class="mr-4" @click="buscarEndereco">BUSCAR</v-btn>
+              <v-btn class="mr-4" @click="buscarEndereco" :class="{ red: !valid, green: valid }">BUSCAR</v-btn>
           </v-col>
           </v-row>
-        </form>
+        </v-form>
 
         
          <v-row justify="center" align="center">
@@ -76,9 +79,19 @@ export default {
   data(){
     return {
       resultados: [],
+      valid: false,
       uf: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
+      ufRules: [
+        (v) => !!v || 'UF requerida'
+      ],
       cidade: '',
+      cidadeRules: [
+        (v) => !!v || 'Cidade requerida'
+      ],
       endereco: '',
+      enderecoRules: [
+        (v) => !!v || 'Endereço requerido'
+      ],
       estado: ''
     }
   },
@@ -86,7 +99,7 @@ export default {
   methods: {
       buscarEndereco(){
         this.$api.get(`${this.estado}/${this.cidade}/${this.endereco}/json/`)
-          .then(res => this.resultados = res.data)
+          .then(res => this.resultados = res.data).then(this.$refs.form.validate())
       }
     }
  
