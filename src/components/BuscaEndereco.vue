@@ -99,7 +99,7 @@ export default {
   methods: {
       buscarEndereco(){
         this.$api.get(`${this.estado}/${this.cidade}/${this.endereco}/json/`)
-          .then(res => this.resultados = res.data).then(this.$refs.form.validate())
+          .then(res => this.resultados = res.data)
       }
     }
  

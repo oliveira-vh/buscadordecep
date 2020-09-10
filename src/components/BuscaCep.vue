@@ -68,7 +68,7 @@ export default {
   methods: {
       buscarCep(){
         this.$api.get(`${this.cep}/json/`)
-          .then(res => this.resultado = res.data).then(this.$refs.form.validate())
+          .then(res => this.resultado = res.data)
       }
     }
  
