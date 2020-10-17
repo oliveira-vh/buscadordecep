@@ -4,6 +4,8 @@ Buscador de CEP feito com VueJS, Vue Router, Vuetify, Axios e a API ViaCEP.
 
 Nesta app é possível encontrar logradouro com CEP assim como pesquisar por logradouros e CEP por cidades.
 
+[Demo](https://buscadordecep.vercel.app/buscaendereco)
+
 ## Após clonar o repositório, instale as dependências com:
 ```
 npm install
